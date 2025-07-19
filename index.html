@@ -381,22 +381,14 @@
             const yourName = "Risfal"; // Replace with your name
             const yourUpiId = "muhammadrisfal352@oksbi"; // IMPORTANT: Replace with your UPI ID
 
-            // --- IMPORTANT: File Data ---
-            // To make the files downloadable, you MUST convert each PDF file into a Base64 string
-            // and paste it here, replacing the placeholder text.
-            // You can use a free online tool to convert your PDF to Base64.
-            const fileData = {
-                "Lecture 1.pdf": "PASTE_YOUR_BASE64_STRING_FOR_LECTURE_1_HERE",
-                "Intro to AI&DS lecture 2.pdf": "PASTE_YOUR_BASE64_STRING_FOR_LECTURE_2_HERE",
-                "Lecture 3.pdf": "PASTE_YOUR_BASE64_STRING_FOR_LECTURE_3_HERE",
-                "LECTURE 4.pdf": "PASTE_YOUR_BASE64_STRING_FOR_LECTURE_4_HERE"
-            };
-
+            // --- IMPORTANT: Google Drive Links ---
+            // Replace the placeholder URLs with your actual Google Drive share links.
+            // Make sure the sharing setting is set to "Anyone with the link".
             const lectureNotes = [
-                { id: 1, title: "Lecture 1: Intro to AI", description: "Introduction to AI and what are it's subsets.", file: "Lecture 1.pdf", price: 20, image: "https://placehold.co/600x400/6366f1/ffffff?text=AI+Subsets" },
-                { id: 2, title: "Lecture 2: Machine Learning Systems", description: "Exploring Supervised, Unsupervised, and Reinforcement Learning.", file: "Intro to AI&DS lecture 2.pdf", price: 20, image: "https://placehold.co/600x400/818cf8/ffffff?text=ML+Systems" },
-                { id: 3, title: "Lecture 3: Regression Models", description: "Understanding linear and logistic regression models for predictive analysis.", file: "Lecture 3.pdf", price: 20, image: "https://placehold.co/600x400/a5b4fc/ffffff?text=Regression" },
-                { id: 4, title: "Lecture 4: K-Means Clustering", description: "An in-depth look at the K-Means clustering algorithm.", file: "LECTURE 4.pdf", price: 20, image: "https://placehold.co/600x400/c7d2fe/ffffff?text=K-Means" }
+                { id: 1, title: "Lecture 1: Intro to AI", description: "Introduction to AI and what are it's subsets.", driveLink: "https://docs.google.com/document/d/1_9V_EAXf_s4s4R4Q_xSt_y0J_z-O_Z9X/edit?usp=sharing&amp;ouid=111111111111111111111&amp;rtpof=true&amp;sd=true", price: 20, image: "https://placehold.co/600x400/6366f1/ffffff?text=AI+Subsets" },
+                { id: 2, title: "Lecture 2: Machine Learning Systems", description: "Exploring Supervised, Unsupervised, and Reinforcement Learning.", driveLink: "https://docs.google.com/document/d/1_9V_EAXf_s4s4R4Q_xSt_y0J_z-O_Z9X/edit?usp=sharing&amp;ouid=111111111111111111111&amp;rtpof=true&amp;sd=true", price: 20, image: "https://placehold.co/600x400/818cf8/ffffff?text=ML+Systems" },
+                { id: 3, title: "Lecture 3: Regression Models", description: "Understanding linear and logistic regression models for predictive analysis.", driveLink: "https://docs.google.com/document/d/1_9V_EAXf_s4s4R4Q_xSt_y0J_z-O_Z9X/edit?usp=sharing&amp;ouid=111111111111111111111&amp;rtpof=true&amp;sd=true", price: 20, image: "https://placehold.co/600x400/a5b4fc/ffffff?text=Regression" },
+                { id: 4, title: "Lecture 4: K-Means Clustering", description: "An in-depth look at the K-Means clustering algorithm.", driveLink: "https://docs.google.com/document/d/1_9V_EAXf_s4s4R4Q_xSt_y0J_z-O_Z9X/edit?usp=sharing&amp;ouid=111111111111111111111&amp;rtpof=true&amp;sd=true", price: 20, image: "https://placehold.co/600x400/c7d2fe/ffffff?text=K-Means" }
             ];
 
             // --- Element Selections ---
@@ -454,7 +446,7 @@
             }
 
             /**
-             * Initiates a file download using Base64 data.
+             * Opens the Google Drive link in a new tab.
              */
             function initiateDownload() {
                 if (!selectedNote) {
@@ -462,20 +454,15 @@
                     return;
                 }
 
-                const base64Data = fileData[selectedNote.file];
+                const driveLink = selectedNote.driveLink;
 
-                if (!base64Data || base64Data.startsWith('PASTE_YOUR_BASE64')) {
-                    showNotification('File data is not available. Please ask the site owner to configure the files.', 'error');
+                if (!driveLink || driveLink.startsWith('YOUR_GOOGLE_DRIVE_LINK')) {
+                    showNotification('File link is not available. Please ask the site owner to configure the files.', 'error');
                     return;
                 }
 
-                const link = document.createElement('a');
-                link.href = `data:application/pdf;base64,${base64Data}`;
-                link.download = selectedNote.file;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                showNotification(`Downloading ${selectedNote.title}...`, 'success');
+                window.open(driveLink, '_blank');
+                showNotification(`Opening download page for ${selectedNote.title}...`, 'success');
             }
 
             /**
