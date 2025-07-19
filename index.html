@@ -8,7 +8,7 @@
     <!-- Google Fonts & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+
     <style>
         /* General Body Styles */
         body {
@@ -97,6 +97,8 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
             border: none;
             cursor: pointer;
+            width: 100%;
+            max-width: 200px;
         }
         .btn:hover {
             transform: translateY(-2px);
@@ -114,6 +116,13 @@
         }
         .btn-buy:hover {
             background-color: #4338ca;
+        }
+        .btn-secondary {
+            background-color: #e5e7eb;
+            color: #4b5563;
+        }
+        .btn-secondary:hover {
+            background-color: #d1d5db;
         }
 
         /* Notes Grid */
@@ -276,6 +285,24 @@
             color: #6b7280;
             margin-top: 1rem;
         }
+        
+        /* Payment Confirmation Section */
+        #payment-confirmation-section {
+            margin-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 1.5rem;
+        }
+        .confirmation-question {
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 1rem 0;
+        }
+        .confirmation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 <body>
@@ -331,8 +358,17 @@
             </div>
             <p><strong>UPI ID:</strong> <span id="upi-id-text"></span></p>
             <p><strong>Amount:</strong> <span id="upi-amount-text"></span></p>
-            <button id="confirm-payment-btn" class="btn btn-buy">I've Paid, Download Notes</button>
-            <p class="modal-note">Note: The download will begin after you confirm payment. This system operates on trust.</p>
+            
+            <!-- Payment Confirmation Section -->
+            <div id="payment-confirmation-section">
+                <p class="confirmation-question">Have you completed the payment?</p>
+                <div class="confirmation-buttons">
+                    <button id="payment-confirmed-btn" class="btn btn-buy">Yes, Download Now</button>
+                    <button id="payment-not-confirmed-btn" class="btn btn-secondary">No, Not Yet</button>
+                </div>
+            </div>
+
+            <p class="modal-note">Note: The download will only begin after you confirm payment.</p>
         </div>
     </div>
 
@@ -357,10 +393,11 @@
             const notificationContainer = document.getElementById('notification-container');
             const upiModal = document.getElementById('upi-modal');
             const closeModalBtn = document.querySelector('.close-modal');
-            const confirmPaymentBtn = document.getElementById('confirm-payment-btn');
             const qrCodeContainer = document.getElementById('qr-code-container');
             const upiIdText = document.getElementById('upi-id-text');
             const upiAmountText = document.getElementById('upi-amount-text');
+            const paymentConfirmedBtn = document.getElementById('payment-confirmed-btn');
+            const paymentNotConfirmedBtn = document.getElementById('payment-not-confirmed-btn');
 
             let selectedNote = null;
 
@@ -413,8 +450,6 @@
                     showNotification('Could not find the selected note. Please try again.', 'error');
                     return;
                 }
-                // NOTE: In a real-world scenario, you would not link directly to the file like this
-                // as it's not secure. This is for demonstration purposes.
                 const link = document.createElement('a');
                 link.href = selectedNote.file;
                 link.download = selectedNote.file;
@@ -437,18 +472,13 @@
                     return;
                 }
 
-                // Construct the UPI payment string
                 const upiString = `upi://pay?pa=${yourUpiId}&pn=${encodeURIComponent(yourName)}&am=${selectedNote.price}&cu=INR&tn=${encodeURIComponent('Notes: ' + selectedNote.title)}`;
-                
-                // Use a public QR code generation API
                 const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiString)}`;
 
-                // Update modal content
                 qrCodeContainer.innerHTML = `<img src="${qrCodeUrl}" alt="UPI QR Code">`;
                 upiIdText.textContent = yourUpiId;
                 upiAmountText.textContent = `₹${selectedNote.price}`;
                 
-                // Show the modal
                 upiModal.classList.add('show');
             }
 
@@ -469,16 +499,21 @@
                 }
             });
 
-            // Listen for click on the "I've Paid" button
-            confirmPaymentBtn.addEventListener('click', () => {
+            // Listen for click on the "Yes, I have paid" button
+            paymentConfirmedBtn.addEventListener('click', () => {
                 initiateDownload();
                 hideUpiModal();
             });
 
-            // Listen for clicks to close the modal
+            // Listen for click on the "No, not yet" button
+            paymentNotConfirmedBtn.addEventListener('click', () => {
+                hideUpiModal();
+                showNotification('Download cancelled. You can try again anytime.', 'error');
+            });
+
+            // Listen for clicks to close the modal (via 'x' or overlay)
             closeModalBtn.addEventListener('click', hideUpiModal);
             upiModal.addEventListener('click', e => {
-                // Close if the overlay (background) is clicked
                 if (e.target === upiModal) {
                     hideUpiModal();
                 }
