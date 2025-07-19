@@ -381,6 +381,17 @@
             const yourName = "Risfal"; // Replace with your name
             const yourUpiId = "muhammadrisfal352@oksbi"; // IMPORTANT: Replace with your UPI ID
 
+            // --- IMPORTANT: File Data ---
+            // To make the files downloadable, you MUST convert each PDF file into a Base64 string
+            // and paste it here, replacing the placeholder text.
+            // You can use a free online tool to convert your PDF to Base64.
+            const fileData = {
+                "Lecture 1.pdf": "PASTE_YOUR_BASE64_STRING_FOR_LECTURE_1_HERE",
+                "Intro to AI&DS lecture 2.pdf": "PASTE_YOUR_BASE64_STRING_FOR_LECTURE_2_HERE",
+                "Lecture 3.pdf": "PASTE_YOUR_BASE64_STRING_FOR_LECTURE_3_HERE",
+                "LECTURE 4.pdf": "PASTE_YOUR_BASE64_STRING_FOR_LECTURE_4_HERE"
+            };
+
             const lectureNotes = [
                 { id: 1, title: "Lecture 1: Intro to AI", description: "Introduction to AI and what are it's subsets.", file: "Lecture 1.pdf", price: 20, image: "https://placehold.co/600x400/6366f1/ffffff?text=AI+Subsets" },
                 { id: 2, title: "Lecture 2: Machine Learning Systems", description: "Exploring Supervised, Unsupervised, and Reinforcement Learning.", file: "Intro to AI&DS lecture 2.pdf", price: 20, image: "https://placehold.co/600x400/818cf8/ffffff?text=ML+Systems" },
@@ -443,15 +454,23 @@
             }
 
             /**
-             * Initiates a file download. This is called after the user confirms payment.
+             * Initiates a file download using Base64 data.
              */
             function initiateDownload() {
                 if (!selectedNote) {
                     showNotification('Could not find the selected note. Please try again.', 'error');
                     return;
                 }
+
+                const base64Data = fileData[selectedNote.file];
+
+                if (!base64Data || base64Data.startsWith('PASTE_YOUR_BASE64')) {
+                    showNotification('File data is not available. Please ask the site owner to configure the files.', 'error');
+                    return;
+                }
+
                 const link = document.createElement('a');
-                link.href = selectedNote.file;
+                link.href = `data:application/pdf;base64,${base64Data}`;
                 link.download = selectedNote.file;
                 document.body.appendChild(link);
                 link.click();
@@ -526,3 +545,4 @@
 
 </body>
 </html>
+
