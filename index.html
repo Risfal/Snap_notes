@@ -456,11 +456,7 @@
 
                 const driveLink = selectedNote.driveLink;
 
-                if (!driveLink || driveLink.startsWith('https://drive.google.com/drive/folders/1AEIrcrcFCVuHnNRV2p08-k3r2GrvQ3aT?usp=sharing')) {
-                    showNotification('File link is not available. Please ask the site owner to configure the files.', 'error');
-                    return;
-                }
-
+              
                 window.open(driveLink, '_blank');
                 showNotification(`Opening download page for ${selectedNote.title}...`, 'success');
             }
