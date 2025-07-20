@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI & DS Lecture Notes </title>
+    <title>BTech Simplified - Lecture Notes</title>
     
     <!-- Google Fonts & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    
     <style>
         /* General Body Styles */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            color: #1f2937;
+            background-color: #f0f4f8; /* Lighter, cooler gray */
+            color: #334155; /* Dark blue-gray for text */
             margin: 0;
             line-height: 1.6;
         }
@@ -28,19 +28,26 @@
 
         /* Header */
         .header {
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: box-shadow 0.3s ease;
         }
+
         .header-title {
-            font-size: 2rem;
+            font-size: 2.25rem;
             font-weight: 700;
-            color: #111827;
+            color: #1e293b;
             margin: 0;
         }
+
         .header-subtitle {
             font-size: 1.125rem;
-            color: #4b5563;
+            color: #475569;
             margin-top: 0.25rem;
         }
 
@@ -51,21 +58,22 @@
         }
 
         .section-title {
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 600;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            color: #1e293b;
         }
 
         /* YouTube Banner */
         .youtube-banner {
-            background-color: #fee2e2;
-            border-left: 4px solid #ef4444;
-            color: #b91c1c;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 2.5rem;
+            background: linear-gradient(135deg, #4f46e5, #818cf8); /* Gradient background */
+            border: none;
+            color: #ffffff;
+            padding: 2rem;
+            border-radius: 1rem; /* Larger border radius */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
             text-align: center;
         }
         .youtube-banner-content {
@@ -73,76 +81,80 @@
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
+            gap: 1.5rem;
         }
         .youtube-icon {
-            font-size: 2.5rem;
-            margin-right: 1rem;
+            font-size: 3rem;
         }
         .youtube-title {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin: 0 0 0.5rem 0;
+            margin: 0;
         }
         .youtube-text {
-            margin: 0 0 0.75rem 0;
+            margin: 0 0 1rem 0;
+            opacity: 0.9;
+        }
+
+        .playlist-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         /* Buttons */
         .btn {
             display: inline-block;
-            font-weight: 700;
-            padding: 0.6rem 1.25rem;
-            border-radius: 0.5rem;
+            font-weight: 600; /* Slightly bolder */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
             text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            width: 100%;
-            max-width: 200px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.05); /* More pronounced hover effect */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
+
         .btn-youtube {
-            background-color: #ef4444;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: #4f46e5;
         }
         .btn-youtube:hover {
-            background-color: #dc2626;
+            background-color: #f0f4f8;
         }
         .btn-buy {
-            background-color: #4f46e5;
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
             color: #ffffff;
         }
         .btn-buy:hover {
-            background-color: #4338ca;
-        }
-        .btn-secondary {
-            background-color: #e5e7eb;
-            color: #4b5563;
-        }
-        .btn-secondary:hover {
-            background-color: #d1d5db;
+            background: linear-gradient(135deg, #4338ca, #6366f1);
         }
 
         /* Notes Grid */
         .notes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem; /* Increased gap */
         }
 
         /* Note Card */
         .note-card {
             background-color: #ffffff;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 1rem; /* Larger border radius */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
         .note-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
         }
         .note-card-img {
             width: 100%;
@@ -151,74 +163,83 @@
         }
         .note-card-body {
             padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Allows footer to stick to the bottom */
         }
         .note-card-title {
             font-size: 1.25rem;
             font-weight: 600;
             margin: 0 0 0.5rem 0;
+            color: #1e293b;
         }
         .note-card-description {
-            color: #4b5563;
-            margin-bottom: 1rem;
-            height: 3.2rem; /* Approx 2 lines */
+            color: #475569;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
         }
         .note-card-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: auto; /* Pushes footer to the bottom */
         }
         .note-card-price {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: #4f46e5;
+        }
+        .note-card-price.free {
+            color: #22c55e;
         }
 
         /* Footer */
         .footer {
             background-color: #ffffff;
-            margin-top: 3rem;
-            padding: 1.5rem 0;
+            margin-top: 4rem;
+            padding: 2rem 0;
             text-align: center;
-            color: #6b7280;
-            border-top: 1px solid #e5e7eb;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
         }
 
         /* Notification */
         #notification-container {
             position: fixed;
-            top: 20px;
+            bottom: 20px; /* Positioned at the bottom */
+            top: auto;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
             display: flex;
-            flex-direction: column;
+            flex-direction: column-reverse; /* New notifications appear on top */
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
         .notification {
             color: white;
-            padding: 0.75rem 1.25rem;
-            border-radius: 0.5rem;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeInSlideDown 0.5s forwards;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.5s forwards;
         }
         .notification.success {
-            background-color: #28a745;
+            background-color: #22c55e; /* A more modern green */
         }
         .notification.error {
-            background-color: #dc3545;
+            background-color: #ef4444; /* A modern red */
         }
 
-        @keyframes fadeInSlideDown {
+        @keyframes fadeInSlideUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* UPI Payment Modal Styles */
+        /* Payment Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -234,75 +255,61 @@
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .modal-overlay.show {
+        .modal-overlay.visible {
             opacity: 1;
             visibility: visible;
         }
-        .modal-content {
-            background-color: #ffffff;
+        .modal {
+            background-color: #fff;
             padding: 2rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             width: 90%;
-            max-width: 400px;
+            max-width: 500px;
             text-align: center;
-            position: relative;
-            transform: translateY(-50px);
+            transform: scale(0.9);
             transition: transform 0.3s ease;
         }
-        .modal-overlay.show .modal-content {
-            transform: translateY(0);
+        .modal-overlay.visible .modal {
+            transform: scale(1);
         }
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            color: #6b7280;
-            cursor: pointer;
-            line-height: 1;
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #1e293b;
         }
-        .close-modal:hover {
-            color: #1f2937;
+        .modal-instructions p {
+            margin: 0.5rem 0;
+            line-height: 1.7;
+            color: #475569;
         }
-        #qr-code-container {
-            width: 200px;
-            height: 200px;
-            margin: 1rem auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-        }
-        #qr-code-container img {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 0.25rem;
-        }
-        .modal-note {
-            font-size: 0.875rem;
-            color: #6b7280;
-            margin-top: 1rem;
-        }
-        
-        /* Payment Confirmation Section */
-        #payment-confirmation-section {
-            margin-top: 1.5rem;
-            border-top: 1px solid #e5e7eb;
-            padding-top: 1.5rem;
-        }
-        .confirmation-question {
+        .modal-instructions strong {
+            color: #4f46e5;
             font-weight: 600;
-            color: #1f2937;
-            margin: 0 0 1rem 0;
         }
-        .confirmation-buttons {
+        .modal-actions {
+            margin-top: 2rem;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             gap: 1rem;
-            flex-wrap: wrap;
         }
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+         .btn-whatsapp:hover {
+            background: #1DAE52;
+        }
+        .btn-close {
+            background: #e2e8f0;
+            color: #475569;
+        }
+        .btn-close:hover {
+            background: #cbd5e1;
+        }
+
     </style>
 </head>
 <body>
@@ -310,8 +317,8 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <h1 class="header-title">Introduction to AI & DS Lecture Notes</h1>
-            <p class="header-subtitle">Your premium source for quality lecture materials.</p>
+            <h1 class="header-title">BTech Simplified</h1>
+            <p class="header-subtitle">Your one-stop source for quality engineering lecture materials.</p>
         </div>
     </header>
 
@@ -324,10 +331,15 @@
                 <i class="fab fa-youtube youtube-icon"></i>
                 <div>
                     <h3 class="youtube-title">Watch the Full Lecture Series!</h3>
-                    <p class="youtube-text">Access the complete video playlist for this course on YouTube.</p>
-                    <a href="https://youtube.com/playlist?list=PLkdux1zkD1ZLpCXjsJofEesZxztn81-47&si=8vSEHBKDtFXjk0-G" target="_blank" rel="noopener noreferrer" class="btn btn-youtube">
-                        Go to Playlist
-                    </a>
+                    <p class="youtube-text">Access complete video playlists for all courses on YouTube.</p>
+                    <div class="playlist-buttons">
+                        <a href="https://youtube.com/playlist?list=PLkdux1zkD1ZLpCXjsJofEesZxztn81-47&si=8vSEHBKDtFXjk0-G" target="_blank" rel="noopener noreferrer" class="btn btn-youtube">
+                            AI & DS Playlist
+                        </a>
+                        <a href="https://youtube.com/playlist?list=PLkdux1zkD1ZJ2eFEvTIo3XopiJv2Qq2rY&si=reLnE_4oy3yZiTW8" target="_blank" rel="noopener noreferrer" class="btn btn-youtube">
+                            Logic Circuit Design Playlist
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -343,34 +355,30 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 SNAPNOTES. All Rights Reserved.</p>
+            <p>© 2024 BTech Simplified. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- UPI Payment Modal -->
-    <div id="upi-modal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Complete Payment via UPI</h2>
-            <p>Scan the QR code with any UPI app or use the UPI ID below.</p>
-            <div id="qr-code-container">
-                <!-- QR Code will be generated here -->
+    <!-- Payment Instructions Modal -->
+    <div id="payment-modal-overlay" class="modal-overlay">
+        <div class="modal">
+            <h2 class="modal-title">How to Purchase</h2>
+            <div class="modal-instructions">
+                <p>To get the notes, please follow these steps:</p>
+                <p>1. Pay <strong id="payment-amount"></strong> to the UPI ID: <strong id="upi-id-display"></strong></p>
+                <p>2. Take a screenshot of the successful payment.</p>
+                <p>3. Click the button below to send the screenshot to us on WhatsApp.</p>
+                <p>You will receive the notes link after we verify your payment.</p>
             </div>
-            <p><strong>UPI ID:</strong> <span id="upi-id-text"></span></p>
-            <p><strong>Amount:</strong> <span id="upi-amount-text"></span></p>
-            
-            <!-- Payment Confirmation Section -->
-            <div id="payment-confirmation-section">
-                <p class="confirmation-question">Have you completed the payment?</p>
-                <div class="confirmation-buttons">
-                    <button id="payment-confirmed-btn" class="btn btn-buy">Yes, Download Now</button>
-                    <button id="payment-not-confirmed-btn" class="btn btn-secondary">No, Not Yet</button>
-                </div>
+            <div class="modal-actions">
+                <a id="whatsapp-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Send Screenshot on WhatsApp
+                </a>
+                <button id="close-modal-btn" class="btn btn-close">Close</button>
             </div>
-
-            <p class="modal-note">Note: The download will only begin after you confirm payment.</p>
         </div>
     </div>
+
 
     <!-- Notification Container -->
     <div id="notification-container"></div>
@@ -378,33 +386,29 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- Configuration ---
-            const yourName = "Risfal"; // Replace with your name
-            const yourUpiId = "muhammadrisfal352@okhdfcbank"; // IMPORTANT: Replace with your UPI ID
-
-            // --- IMPORTANT: Google Drive Links ---
-            // Replace the placeholder URLs with your actual Google Drive share links.
-            // Make sure the sharing setting is set to "Anyone with the link".
+            const yourName = "BTech Simplified"; // Your brand name
+            // IMPORTANT: Replace these with your actual details.
+            const whatsappNumber = "919037659348"; // Use your full WhatsApp number with country code, no '+' or spaces.
+            const upiId = "muhammadrisfal352@okhdfcbank";
+            
             const lectureNotes = [
-                { id: 1, title: "Lecture 1: Intro to AI", description: "Introduction to AI and what are it's subsets.", driveLink: "https://drive.google.com/file/d/1E7n8bifkIU-H9Sn5wWpxB5YQWiQOR92n/view?usp=drive_link", price: 20, image: "https://placehold.co/600x400/6366f1/ffffff?text=AI+Subsets" },
-                { id: 2, title: "Lecture 2: Machine Learning Systems", description: "Exploring Supervised, Unsupervised, and Reinforcement Learning.", driveLink: "https://drive.google.com/file/d/1NjaEH1MlWW0k5abjQpnIG00uX6ZMKa9s/view?usp=drive_link", price: 20, image: "https://placehold.co/600x400/818cf8/ffffff?text=ML+Systems" },
-                { id: 3, title: "Lecture 3: Regression Models", description: "Understanding linear and logistic regression models for predictive analysis.", driveLink: "https://drive.google.com/file/d/1Rjd-tFWBr1TcHpV0nAkeuT6Ts9pn_dsh/view?usp=drive_link", price: 20, image: "https://placehold.co/600x400/a5b4fc/ffffff?text=Regression" },
-                { id: 4, title: "Lecture 4: K-Means Clustering", description: "An in-depth look at the K-Means clustering algorithm.", driveLink: "https://drive.google.com/file/d/1pnJ-1cEUStKXByLaXwzfe8Yw0Q2Uy_26/view?usp=drive_link", price: 20, image: "https://placehold.co/600x400/c7d2fe/ffffff?text=K-Means" }
+                // AI & DS Course
+                { id: 1, title: "Lecture 1: Intro to AI", description: "Introduction to AI and what are it's subsets.", file: "https://drive.google.com/file/d/1E7n8bifkIU-H9Sn5wWpxB5YQWiQOR92n/view?usp=drive_link", image: "https://placehold.co/600x400/6366f1/ffffff?text=AI+Subsets", price: 20 },
+                { id: 2, title: "Lecture 2: Machine Learning Systems", description: "Exploring Supervised, Unsupervised, and Reinforcement Learning.", file: "https://drive.google.com/file/d/1NjaEH1MlWW0k5abjQpnIG00uX6ZMKa9s/view?usp=drive_link", image: "https://placehold.co/600x400/818cf8/ffffff?text=ML+Systems", price: 20 },
+                { id: 3, title: "Lecture 3: Regression Models", description: "Understanding linear and logistic regression models for predictive analysis.", file: "https://drive.google.com/file/d/1Rjd-tFWBr1TcHpV0nAkeuT6Ts9pn_dsh/view?usp=drive_link", image: "https://placehold.co/600x400/a5b4fc/ffffff?text=Regression", price: 20 },
+                { id: 4, title: "Lecture 4: K-Means Clustering", description: "An in-depth look at the K-Means clustering algorithm.", file: "https://drive.google.com/file/d/1pnJ-1cEUStKXByLaXwzfe8Yw0Q2Uy_26/view?usp=drive_link", image: "https://placehold.co/600x400/c7d2fe/ffffff?text=K-Means", price: 20 },
+                // Logic Circuit Design Course
+                { id: 5, title: "LCD Lecture 1: Half Adder Circuits", description: "This is a free introductory lecture. Watch the full series on YouTube.", file: "LCD Lecture 1.pdf", image: "https://placehold.co/600x400/34d399/ffffff?text=Half+Adders", price: 0, isFree: true }
             ];
 
             // --- Element Selections ---
             const notesGrid = document.getElementById('notes-grid');
             const notificationContainer = document.getElementById('notification-container');
-            const upiModal = document.getElementById('upi-modal');
-            const closeModalBtn = document.querySelector('.close-modal');
-            const qrCodeContainer = document.getElementById('qr-code-container');
-            const upiIdText = document.getElementById('upi-id-text');
-            const upiAmountText = document.getElementById('upi-amount-text');
-            const paymentConfirmedBtn = document.getElementById('payment-confirmed-btn');
-            const paymentNotConfirmedBtn = document.getElementById('payment-not-confirmed-btn');
-
-            let selectedNote = null;
-
-            // --- Functions ---
+            const modalOverlay = document.getElementById('payment-modal-overlay');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const paymentAmountEl = document.getElementById('payment-amount');
+            const upiIdDisplayEl = document.getElementById('upi-id-display');
+            const whatsappLink = document.getElementById('whatsapp-link');
 
             /**
              * Populates the grid with lecture notes.
@@ -415,15 +419,26 @@
                 lectureNotes.forEach(note => {
                     const card = document.createElement('div');
                     card.className = 'note-card';
-                    card.innerHTML = `
-                        <img src="${note.image}" alt="${note.title}" class="note-card-img" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0e0e0/ffffff?text=Image+Not+Found';">
-                        <div class="note-card-body">
-                            <h3 class="note-card-title">${note.title}</h3>
-                            <p class="note-card-description">${note.description}</p>
+
+                    const footerHtml = note.isFree
+                        ? `
+                            <div class="note-card-footer">
+                                <span class="note-card-price free">Free</span>
+                            </div>
+                        `
+                        : `
                             <div class="note-card-footer">
                                 <span class="note-card-price">₹${note.price}</span>
                                 <button data-note-id="${note.id}" class="btn btn-buy">Buy Now</button>
                             </div>
+                        `;
+
+                    card.innerHTML = `
+                        <img src="${note.image}" alt="${note.title}" class="note-card-img">
+                        <div class="note-card-body">
+                            <h3 class="note-card-title">${note.title}</h3>
+                            <p class="note-card-description">${note.description}</p>
+                            ${footerHtml}
                         </div>
                     `;
                     notesGrid.appendChild(card);
@@ -431,96 +446,48 @@
             }
 
             /**
-             * Shows a notification message to the user.
-             * @param {string} message - The message to display.
-             * @param {string} type - 'success' or 'error'.
-             */
-            function showNotification(message, type = 'success') {
-                const notification = document.createElement('div');
-                notification.className = `notification ${type}`;
-                notification.textContent = message; // Use textContent for security
-                notificationContainer.appendChild(notification);
-                setTimeout(() => {
-                    notification.remove();
-                }, 4000);
-            }
-
-            /**
-             * Opens the Google Drive link in a new tab.
-             */
-            function initiateDownload() {
-                if (!selectedNote) {
-                    showNotification('Could not find the selected note. Please try again.', 'error');
-                    return;
-                }
-
-                const driveLink = selectedNote.driveLink;
-
-               
-
-                window.open(driveLink, '_blank');
-                showNotification(`Opening download page for ${selectedNote.title}...`, 'success');
-            }
-
-            /**
-             * Generates a UPI QR code and displays the payment modal.
+             * Opens the payment instruction modal with details for the selected note.
              * @param {number} noteId - The ID of the note to purchase.
              */
-            function showUpiModal(noteId) {
-                selectedNote = lectureNotes.find(n => n.id === noteId);
+            function openPaymentModal(noteId) {
+                const selectedNote = lectureNotes.find(n => n.id === noteId);
                 if (!selectedNote) return;
 
-                if (!yourUpiId || yourUpiId === "yourname@upi") {
-                    showNotification("Please configure your UPI ID in script.js.", "error");
-                    return;
-                }
+                // Update modal content
+                paymentAmountEl.textContent = `₹${selectedNote.price}`;
+                upiIdDisplayEl.textContent = upiId;
 
-                const upiString = `upi://pay?pa=${yourUpiId}&pn=${encodeURIComponent(yourName)}&am=${selectedNote.price}&cu=INR&tn=${encodeURIComponent('Notes: ' + selectedNote.title)}`;
-                const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiString)}`;
+                // Create pre-filled WhatsApp message
+                const message = `Hello, I have paid for the notes: "${selectedNote.title}". Please find the screenshot attached for verification.`;
+                const encodedMessage = encodeURIComponent(message);
+                whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
-                qrCodeContainer.innerHTML = `<img src="${qrCodeUrl}" alt="UPI QR Code">`;
-                upiIdText.textContent = yourUpiId;
-                upiAmountText.textContent = `₹${selectedNote.price}`;
-                
-                upiModal.classList.add('show');
+                // Show the modal
+                modalOverlay.classList.add('visible');
             }
 
             /**
-             * Hides the UPI payment modal.
+             * Closes the payment modal.
              */
-            function hideUpiModal() {
-                upiModal.classList.remove('show');
-                selectedNote = null; // Clear selection when modal is closed
+            function closePaymentModal() {
+                modalOverlay.classList.remove('visible');
             }
 
             // --- Event Listeners ---
-
-            // Listen for clicks on "Buy Now" buttons
             notesGrid.addEventListener('click', e => {
                 if (e.target.classList.contains('btn-buy')) {
-                    showUpiModal(parseInt(e.target.getAttribute('data-note-id')));
+                    openPaymentModal(parseInt(e.target.getAttribute('data-note-id')));
                 }
             });
 
-            // Listen for click on the "Yes, I have paid" button
-            paymentConfirmedBtn.addEventListener('click', () => {
-                initiateDownload();
-                hideUpiModal();
-            });
-
-            // Listen for click on the "No, not yet" button
-            paymentNotConfirmedBtn.addEventListener('click', () => {
-                hideUpiModal();
-                showNotification('Download cancelled. You can try again anytime.', 'error');
-            });
-
-            // Listen for clicks to close the modal (via 'x' or overlay)
-            closeModalBtn.addEventListener('click', hideUpiModal);
-            upiModal.addEventListener('click', e => {
-                if (e.target === upiModal) {
-                    hideUpiModal();
+            closeModalBtn.addEventListener('click', closePaymentModal);
+            modalOverlay.addEventListener('click', (e) => {
+                // Close modal if the overlay (background) is clicked
+                if (e.target === modalOverlay) {
+                    closePaymentModal();
                 }
             });
+
 
             // --- Initial Load ---
             displayNotes();
